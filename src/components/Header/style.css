@@ -1,0 +1,22 @@
+.logo {
+  width: 110px;
+  padding: 0;
+}
+
+.logo-heading {
+  align-self: center;
+  padding: 0;
+}
+
+.search-input {
+  padding: 0;
+}
+
+.form-control {
+  width: 300px;
+}
+
+.bi-search {
+  position: relative;
+  right: 40px;
+}
