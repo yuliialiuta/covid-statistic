@@ -1,0 +1,10 @@
+.table-head {
+  background-color: #2196f3;
+  color: white;
+  border: 1px solid #2196f3;
+  border-radius: 15px;
+}
+.table-data {
+  border: 1px solid lightgrey;
+  border-radius: 15px;
+}

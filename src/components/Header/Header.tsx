@@ -5,7 +5,7 @@ import "./style.css";
 function Header() {
   return (
     <header>
-      <div className="row m-3">
+      <div className="row m-3 ps-4 pe-4 ">
         <img className="logo col-2 " src={Logo} alt="Logo" />
         <h1 className="logo-heading col-2 fw-bolder ">STATISTIC</h1>
         <div className="search row col-4 ms-auto">
