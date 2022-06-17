@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../../pictures/logo.svg";
 import "./style.css";
 
-function Header() {
+const Header: React.FC = () => {
   return (
     <header>
       <div className="row m-3 ps-4 pe-4 ">
@@ -35,6 +35,6 @@ function Header() {
       </div>
     </header>
   );
-}
+};
 
 export default Header;
