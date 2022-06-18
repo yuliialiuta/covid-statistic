@@ -1,8 +1,16 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import Logo from "../../pictures/logo.svg";
 import "./style.css";
 
-const Header: React.FC = () => {
+type HeaderProps = {
+  search: string;
+  onChange: React.Dispatch<SetStateAction<string>>;
+};
+
+const Header: React.FC<HeaderProps> = ({ search, onChange }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value);
+  };
   return (
     <header>
       <div className="row m-3 ps-4 pe-4 ">
@@ -15,8 +23,10 @@ const Header: React.FC = () => {
                 <input
                   className="form-control me-2 p-2 border-0 rounded-pill shadow-sm"
                   type="search"
+                  value={search}
                   placeholder="Search..."
                   aria-label="Search"
+                  onChange={handleChange}
                 />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -21,7 +21,11 @@ type Country = {
   Date: string;
 };
 
-const CountriesTable: React.FC = () => {
+type CountriesTableProps = {
+  filter: string;
+};
+
+const CountriesTable: React.FC<CountriesTableProps> = ({ filter }) => {
   const [countries, setCountries] = useState<Country[]>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -47,13 +51,17 @@ const CountriesTable: React.FC = () => {
           <div className="col-6">Country</div>
           <div className="col-5">Total Confirmed</div>
         </div>
-        {countries?.map((country: Country) => (
-          <div className="row table-data p-2 m-1" key={country.Id}>
-            <div className="col-1">{country.Id}</div>
-            <div className="col-6">{country.Country}</div>
-            <div className="col-5">{country.TotalConfirmed}</div>
-          </div>
-        ))}
+        {countries
+          ?.filter((country: Country) =>
+            country.Country.toLowerCase().startsWith(filter.toLowerCase())
+          )
+          .map((country: Country) => (
+            <div className="row table-data p-2 m-1" key={country.Id}>
+              <div className="col-1">{country.Id}</div>
+              <div className="col-6">{country.Country}</div>
+              <div className="col-5">{country.TotalConfirmed}</div>
+            </div>
+          ))}
       </div>
     </div>
   );
