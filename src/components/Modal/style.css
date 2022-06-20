@@ -1,0 +1,16 @@
+.modal-dialog {
+  width: 400px;
+}
+
+.modal-content {
+  padding: 0 20px;
+  border-radius: 20px;
+}
+
+.modal-footer {
+  border: none;
+}
+
+.btn {
+  background-color: #2196f3;
+}

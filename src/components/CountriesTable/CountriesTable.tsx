@@ -1,44 +1,40 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import axios from "axios";
+import Country from "../Types/Country";
+import Modal from "../Modal/Modal";
 
-type Summary = {
+interface Summary {
   Global: any;
   Countries: Country[];
-};
+}
 
-type Country = {
-  Id: number;
-  Country: string;
-  CountryCode: string;
-  Slug: string;
-  NewConfirmed: number;
-  TotalConfirmed: number;
-  NewDeaths: number;
-  TotalDeaths: number;
-  NewRecovered: number;
-  TotalRecovered: number;
-  Date: string;
-};
-
-type CountriesTableProps = {
+interface CountriesTableProps {
   filter: string;
-};
+}
 
 const CountriesTable: React.FC<CountriesTableProps> = ({ filter }) => {
   const [countries, setCountries] = useState<Country[]>([]);
+  const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(
+    undefined
+  );
+
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get<Summary>(
-        "https://api.covid19api.com/summary"
-      );
-      const allCountries = response.data.Countries.map(
-        (country, index): Country => ({
-          ...country,
-          Id: index + 1,
-        })
-      );
-      setCountries(allCountries);
+      try {
+        const response = await axios.get<Summary>(
+          "https://api.covid19api.com/summary"
+        );
+        const allCountries = response.data.Countries.map(
+          (country, index): Country => ({
+            ...country,
+            Id: index + 1,
+          })
+        );
+        setCountries(allCountries);
+      } catch (e: unknown) {
+        setCountries([]);
+      }
     };
     fetchData();
   }, []);
@@ -56,13 +52,20 @@ const CountriesTable: React.FC<CountriesTableProps> = ({ filter }) => {
             country.Country.toLowerCase().startsWith(filter.toLowerCase())
           )
           .map((country: Country) => (
-            <div className="row table-data p-2 m-1" key={country.Id}>
+            <div
+              className="row table-data p-2 m-1"
+              key={country.Id}
+              onClick={() => setSelectedCountry(country)}
+              data-bs-toggle="modal"
+              data-bs-target="#coutryDetailModal"
+            >
               <div className="col-1">{country.Id}</div>
               <div className="col-6">{country.Country}</div>
               <div className="col-5">{country.TotalConfirmed}</div>
             </div>
           ))}
       </div>
+      <Modal id="coutryDetailModal" country={selectedCountry} />
     </div>
   );
 };

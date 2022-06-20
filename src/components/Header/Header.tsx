@@ -2,10 +2,10 @@ import React, { SetStateAction } from "react";
 import Logo from "../../pictures/logo.svg";
 import "./style.css";
 
-type HeaderProps = {
+interface HeaderProps {
   search: string;
   onChange: React.Dispatch<SetStateAction<string>>;
-};
+}
 
 const Header: React.FC<HeaderProps> = ({ search, onChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ search, onChange }) => {
       <div className="row m-3 ps-4 pe-4 ">
         <img className="logo col-2 " src={Logo} alt="Logo" />
         <h1 className="logo-heading col-2 fw-bolder ">STATISTIC</h1>
-        <div className="search row col-4 ms-auto">
+        <div className="search row col-sm-4 ms-auto">
           <nav className="navbar navbar-light">
             <div className="search-input container-fluid justify-content-end">
               <form className="d-flex">
